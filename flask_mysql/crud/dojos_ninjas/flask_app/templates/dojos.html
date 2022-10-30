@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>Dojos</title>
+</head>
+
+<body>
+    <div class="b">
+        <div class="left">
+            <div class="container text-center">
+                <div class="row justify-content-start">
+                    <div class="col-4">
+                        <form action="/new/dojo" method="post">
+                            <h1><u>New Dojo</u></h1>
+                            <div class="">
+                                <label for='name' class="mb-4">Name:</label>
+                                <input type='text' name='name'>
+                                <input type="submit" value="Add Dojo"
+                                    class="btn btn-primary btn-outline-dark text-light">
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="col-4">
+                        <h2><u>All Dojos</u></h2>
+                        {% for d in all_dojos %}
+                        <p>
+                            <a href="/dojo/{{d.id}}" class="text-warning">{{d.name}}</a>
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="btn btn-primary btn-outline-dark">
+                    <a href="/ninjas" class="text-light">Add Ninja</a>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
