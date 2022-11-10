@@ -36,23 +36,23 @@ class User:
         return cls(result[0])
     
     
-    @classmethod
-    def get_one_with_recipes(cls, data):
-        query = "SELECT * FROM users LEFT JOIN recipes on user.id = recipe.user_id WHERE user.id = %(id)s;"
-        results = connectToMySQL('recipes').query_db(query,data)
-        print(results)
-        recipe = cls(results[0])
-        for row in results:
-            n = {
-                'id': row['user.id'],
-                'name': row['name'],
-                'last_name': row['last_name'],
-                'age': row['age'],
-                'created_at': row['user.created_at'],
-                'updated_at': row['user.updated_at']
-            }
-            recipe.user.append(User(n)) #dojo comes from results, ninja comes from self.ninja = []
-        return recipe
+    # @classmethod
+    # def get_one_with_recipes(cls, data):
+    #     query = "SELECT * FROM users LEFT JOIN recipes on user.id = recipe.user_id WHERE user.id = %(id)s;"
+    #     results = connectToMySQL('recipes').query_db(query,data)
+    #     print(results)
+    #     recipe = cls(results[0])
+    #     for row in results:
+    #         n = {
+    #             'id': row['user.id'],
+    #             'name': row['name'],
+    #             'last_name': row['last_name'],
+    #             'age': row['age'],
+    #             'created_at': row['user.created_at'],
+    #             'updated_at': row['user.updated_at']
+    #         }
+    #         recipe.user.append(User(n)) #dojo comes from results, ninja comes from self.ninja = []
+    #     return recipe
     
     @staticmethod
     def validate_user(user):

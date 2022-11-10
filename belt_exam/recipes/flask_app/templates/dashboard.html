@@ -10,11 +10,11 @@
 </head>
 <body>
     <h1>Welcome {{user.first_name}} {{user.last_name}}</h1>
-    <h2>All posted recipes:</h2>
     <div class="d-flex flex-row-reverse mb-3 gap-2">
         <a href="/logout" class="btn btn-info p-2">Logout</a>
         <a href="/recipe/new" class="btn btn-info p-2">+Create</a>
     </div>
+    <h2>All posted recipes:</h2>
     <div class="recipe_box">
 
         <table class="table table-striped-columns">
@@ -27,12 +27,17 @@
                 </tr>
             </thead>
             <tbody>
-                {%for recipe in recipe%}
+                {%for recipe in recipes: %}
                 <tr>
                     <td>{{recipe.name}}</td>
-                    <td>{{recipe.under}}</td>
-                    <td>{{recipe.user_id}}</td>
+                    <td>{% if recipe.under: %}</td>
+                        Yes
+                        {% else: %}
+                        No
+                        {% endif %}
+                    <td>{{recipe.user_id.first_name}}</td>
                     <td>
+                        <a href="/recipes/{{recipe.id}}">view instructions</a>
                         <a href="/recipes/edit/{{recipe.id}}">Edit</a>
                         <div></div>
                         <a href="/recipes/destroy/{{recipe.id}}">Delete</a>

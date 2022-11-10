@@ -23,29 +23,37 @@
             <div class="row align-items-start">
                 <div class="left col">
                     <form action='/create_recipe' method='post'>
+                        {% with messages = get_flashed_messages(category_filter=['recipe']) %}     <!-- declare a variable called messages -->
+                        {% if messages %}                            <!-- check if there are any messages -->
+                            {% for message in messages %}            <!-- loop through the messages -->
+                                <p class="text-danger">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <input type="hidden" name="user_id" value="{{session['user_id']}}">
                         <label for='name' class="mb-4 p-3">Name:</label>
                         <input type='text' name='name'>
 
                         <div>
                             <label for='description' class="mb-2 p-3">Description:</label>
-                            <textarea class="form-control mb-2" name="Description" rows="3"></textarea>
+                            <textarea class="form-control mb-2" name="description" rows="3"></textarea>
                         </div>
                         <div>
                             <label for='instructions' class="mb-2 p-3">Instructions:</label>
-                            <textarea class="form-control" name="instructions" rows="3"></textarea>
+                            <textarea class="form-control" name="instructions" rows="5"></textarea>
                         </div>
                 </div>
                 <div class="right col p-3">
                     <div class="mb-4">
                         <label for="created_at">Date Cooked/Made:</label>
-                        <input type="date" id="date" name="created_at">
+                        <input type="date" id="date" name="date_made">
                     </div>
-                    <h3>Did this recipe take less than 30 minutes to make?</h3>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
-                        <label class="form-check-label" for="flexCheckIndeterminate">
-                            Yes
-                        </label>
+                    <div class="form-group">
+                        <p>Under 30 min?</p>
+                        <label for="yes" class="form-label">Yes</label>
+                        <input type="radio" name="under" value="1" id="yes">
+                        <label for="no" class="form-label">No</label>
+                        <input type="radio" name="under" value="0" id="no">
                     </div>
                 </div>
             </div>

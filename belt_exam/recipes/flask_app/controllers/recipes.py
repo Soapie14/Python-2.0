@@ -13,5 +13,8 @@ def new_recipe():
 
 @app.route('/create_recipe', methods=['POST'])
 def create():
+    if not Recipe.validate_recipe(request.form):
+        # redirect to the route where the burger form is rendered.
+        return redirect('/recipe/new')
     Recipe.save(request.form)
     return redirect('/dashboard')
