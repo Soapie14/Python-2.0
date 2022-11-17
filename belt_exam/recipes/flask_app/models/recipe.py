@@ -22,7 +22,7 @@ class Recipe:
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM recipes JOIN users on users.id = recipes.user_id;"
-        results = connectToMySQL('recipe').query_db(query)
+        results = connectToMySQL('recipes').query_db(query)
         recipe = []
         for d in results:
             recipe.append(cls(d))
@@ -30,7 +30,7 @@ class Recipe:
     
     @classmethod
     def save(cls, data):
-        query = "INSERT INTO recipes (name, under, instructions, description, date_made) VALUES (%(name)s, %(under)s, %(instructions)s, %(description)s, %(date_made)s);"
+        query = "INSERT INTO recipes (name, under, instructions, description, date_made, user_id) VALUES (%(name)s, %(under)s, %(instructions)s, %(description)s, %(date_made)s, %(user_id)s);"
         result= connectToMySQL('recipes').query_db(query, data)
         return result
     
@@ -49,12 +49,12 @@ class Recipe:
         recipe = cls(results[0])
         for row in results:
             n = {
-                'id': row['user.id'],
-                'name': row['name'],
-                'last_name': row['last_name'],
-                'age': row['age'],
-                'created_at': row['user.created_at'],
-                'updated_at': row['user.updated_at']
+                    "id": data["user_id"],
+                    "first_name": data["first_name"],
+                    "last_name": data["last_name"],
+                    "email": data["email"],
+                    "created_at": data["created_at"],
+                    "updated_at": data["updated_at"]
             }
             recipe.user.append(User(n)) 
         return recipe

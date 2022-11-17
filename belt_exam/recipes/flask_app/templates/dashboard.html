@@ -30,12 +30,13 @@
                 {%for recipe in recipes: %}
                 <tr>
                     <td>{{recipe.name}}</td>
-                    <td>{% if recipe.under: %}</td>
+                    <td>{% if recipe.under: %}
                         Yes
                         {% else: %}
                         No
                         {% endif %}
-                    <td>{{recipe.user_id.first_name}}</td>
+                    </td>
+                    <td>{{recipe.user.first_name}}</td>
                     <td>
                         <a href="/recipes/{{recipe.id}}">view instructions</a>
                         <a href="/recipes/edit/{{recipe.id}}">Edit</a>
